@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: reference-app
+  cache:
+    type: redis
+    redis:
+      key-prefix: referece-app-v1
+      time-to-live: 600000
+      use-key-prefix: true
+      host: localhost
+      port: 6379
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  metrics:
+    export:
+      graphite.enabled: false
+      jmx.enabled: true
+
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: FULL
+#eureka:
+#  client:
+#    enabled: false
+#    registerWithEureka: false
+#    fetchRegistry: false
+
+#Rest Clients
+clients:
+  items:
+    baseUrl: http://localhost:8888
+

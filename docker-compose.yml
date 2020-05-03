@@ -1,0 +1,18 @@
+version: '3.6'
+services:
+  reference-app-cassandra:
+    container_name: reference-app-cassandra
+    image: 'cassandra:3.11.2'
+    ports:
+      - '9042:9042'
+    volumes:
+      - 'reference-app-cassandra-vol:/var/lib/cassandra'
+    restart: always
+  reference-app-redis:
+    container_name: reference-app-redis
+    image: 'redis:latest'
+    ports:
+      - '6379:6379'
+    restart: always
+volumes:
+  reference-app-cassandra-vol:

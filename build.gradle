@@ -1,0 +1,51 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.nairs.referenceapp'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "Hoxton.SR3")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.2.6.RELEASE'
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.2.6.RELEASE'
+	testImplementation('org.springframework.boot:spring-boot-starter-test:2.2.6.RELEASE') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+
+	//Feign
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+	//Lombok
+	compileOnly 'org.projectlombok:lombok:1.18.12'
+	annotationProcessor 'org.projectlombok:lombok:1.18.12'
+	testCompileOnly 'org.projectlombok:lombok:1.18.12'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+	//Redis
+	implementation 'org.springframework.data:spring-data-redis:2.2.6.RELEASE'
+	implementation 'io.lettuce:lettuce-core:5.2.2.RELEASE'
+
+	//Cassandra
+	implementation 'org.springframework.data:spring-data-cassandra:2.2.6.RELEASE'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+test {
+	useJUnitPlatform()
+}
